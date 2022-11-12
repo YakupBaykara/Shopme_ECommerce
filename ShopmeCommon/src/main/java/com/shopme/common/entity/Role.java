@@ -8,11 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
 @NoArgsConstructor
+@ToString(of = "name")
+@EqualsAndHashCode(of = "id")
 @Table(name = "roles")
 public class Role {
 	
@@ -25,6 +29,10 @@ public class Role {
 
 	@Column(length = 150, nullable = false)
 	private String description;
+	
+	public Role(Integer id) {
+		this.id = id;
+	}
 	
 	public Role(String name) {
 		this.name = name;
