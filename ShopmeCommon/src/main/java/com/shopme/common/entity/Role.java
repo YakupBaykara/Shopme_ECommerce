@@ -7,15 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 
+/**
+ * @author Yakup
+ *
+ */
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@ToString(of = "name")
 @EqualsAndHashCode(of = "id")
 @Table(name = "roles")
 public class Role {
@@ -41,5 +45,10 @@ public class Role {
 	public Role(String name, String description) {
 		this.name = name;
 		this.description = description;
+	}
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }
