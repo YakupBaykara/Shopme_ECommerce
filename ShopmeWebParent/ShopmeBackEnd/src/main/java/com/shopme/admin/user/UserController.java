@@ -38,6 +38,7 @@ public class UserController {
 		
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles" ,listRoles);
+		model.addAttribute("pageTitle", "Create New User");
 		
 		return "user_form";
 	}
@@ -51,5 +52,22 @@ public class UserController {
 		redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
 
 		return "redirect:/users";
+	}
+
+	@GetMapping("/users/update/{id}")
+	public String updateUser(Integer id, Model model, RedirectAttributes redirectAttributes) {
+		try {
+			User user = userService.getUserById(id);
+			List<Role> listRoles = userService.listRoles();
+
+			model.addAttribute("user", user);
+			model.addAttribute("pageTitle", "UpdateUser (ID: " +id+ ")");
+			model.addAttribute("listRoles" ,listRoles);
+			return "user_form";
+
+		} catch (UserNotFoundException ex) {
+			redirectAttributes.addFlashAttribute("message", ex.getMessage());
+			return "redirect:/users";
+		}
 	}
 }
