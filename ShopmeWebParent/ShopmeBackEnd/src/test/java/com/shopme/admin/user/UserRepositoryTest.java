@@ -93,7 +93,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testDeleteUser() {
 		
-		Integer id = 2;
+		Integer id = 4;
 		userRepository.deleteById(id);
 	}
 
@@ -104,4 +104,25 @@ public class UserRepositoryTest {
 
 		assertThat(user).isNotNull();
 	}
+	@Test
+	public void testCountById() {
+		Integer id = 5;
+		Long user = userRepository.countById(id);
+
+		assertThat(user).isNotNull().isGreaterThan(0);
+	}
+
+	@Test
+	public void testDisableUser() {
+		Integer id = 1;
+		userRepository.updateEnabledStatus(id, false);
+	}
+
+	@Test
+	public void testEnableUser() {
+		Integer id = 1;
+		userRepository.updateEnabledStatus(id, true);
+
+	}
+
 }
