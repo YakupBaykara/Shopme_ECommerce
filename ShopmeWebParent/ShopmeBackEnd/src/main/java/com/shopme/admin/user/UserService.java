@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserService {
 
 	@Autowired
@@ -29,7 +32,7 @@ public class UserService {
 		return (List<Role>) roleRepository.findAll();
 	}
 
-	public void save(User user) {
+	public User save(User user) {
 
 		boolean isUpdatingUser = (user.getId() != null);
 		if (isUpdatingUser) {
@@ -42,7 +45,7 @@ public class UserService {
 		} else {
 			encodePassword(user);
 		}
-		userRepository.save(user);
+		return userRepository.save(user);
 	}
 
 	private void encodePassword(User user) {
@@ -67,4 +70,14 @@ public class UserService {
 		return userRepository.findById(id)
 				.orElseThrow(() -> new UserNotFoundException("Couldn't find any user with ID : " +id));
 	}
+	public void deleteUser(Integer id) throws UserNotFoundException {
+		Long userCount = userRepository.countById(id);
+		if (userCount == null || userCount == 0)
+			throw new UserNotFoundException("Couldn't find any user with ID : " +id);
+		userRepository.deleteById(id);
+	}
+	public void updateUserEnabledStatus(Integer id, boolean enabled) {
+		userRepository.updateEnabledStatus(id, enabled);
+	}
+
 }
