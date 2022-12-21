@@ -29,8 +29,10 @@ public class UserService {
 	@Autowired
 	private RoleRepository	roleRepository;
 	
-	public List<User> listUsers() {
-		return (List<User>) userRepository.findAll();
+	public List<User> listAll() {
+		return (List<User>) userRepository.findAll(
+				Sort.by("firstName").ascending()
+		);
 	}
 
 	public Page<User> listByPage(int pageNum,

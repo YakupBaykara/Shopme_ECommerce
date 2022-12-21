@@ -63,6 +63,12 @@ public class User {
 		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", roles=" + roles + "]";
 	}
+
+	@Transient
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+
 	@Transient
 	public String getPhotosImagePath() {
 		if (id == null || photos == null) return "/images/default-user.png";
