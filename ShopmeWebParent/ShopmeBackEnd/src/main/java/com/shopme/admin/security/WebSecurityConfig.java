@@ -30,15 +30,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 //        http.authorizeRequests().anyRequest().permitAll();        //Tüm kullanıcıların şifresiz girişini sağlar
         http
-                .authorizeRequests()
-                .anyRequest().authenticated()                                    // Tüm kullanıcıların girişi engellenir
-                .and()
-                .formLogin()
+                .authorizeRequests().anyRequest().authenticated()                                    // Tüm kullanıcıların girişi engellenir
+                .and().formLogin()
                     .loginPage("/login")
                     .usernameParameter("email")
                     .permitAll()
-                .and()
-                .logout().permitAll();
+                .and().logout().permitAll()
+                .and().rememberMe()
+                    .key("AbcDefgHijKlmnOpqrs_1234567890")
+                    .tokenValiditySeconds(7 * 24 * 60 * 60);
     }
 
     @Override
