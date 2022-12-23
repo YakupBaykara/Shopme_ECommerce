@@ -34,9 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()                                    // Tüm kullanıcıların girişi engellenir
                 .and()
                 .formLogin()
-//                    .loginPage("/login")
-                    .passwordParameter("email")
-                    .permitAll();
+                    .loginPage("/login")
+                    .usernameParameter("email")
+                    .permitAll()
+                .and()
+                .logout().permitAll();
     }
 
     @Override

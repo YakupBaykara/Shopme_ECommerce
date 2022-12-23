@@ -27,7 +27,7 @@ public class UserController {
 	
 	@GetMapping("/users")
 	public String listFirstPage(Model model) {
-		return listByPage(1, model, "firstName", "asc", null);
+		return listByPage(1, model, "id", "asc", null);
 	}
 
 	@GetMapping("/users/page/{pageNum}")
