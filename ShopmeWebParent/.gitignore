@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 /ShopmeBackEnd/src/main/resources/webfonts/fontawesome-free-5.15.4-web/
+/ShopmeBackEnd/user-photos

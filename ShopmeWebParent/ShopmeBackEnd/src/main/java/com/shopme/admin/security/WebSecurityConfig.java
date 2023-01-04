@@ -30,7 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 //        http.authorizeRequests().anyRequest().permitAll();        //Tüm kullanıcıların şifresiz girişini sağlar
         http
-                .authorizeRequests().anyRequest().authenticated()                                    // Tüm kullanıcıların girişi engellenir
+                .authorizeRequests()
+                .antMatchers("/users/**").hasAuthority("Admin")     // Authorization
+                .anyRequest().authenticated()                                    // Tüm kullanıcıların girişi engellenir
                 .and().formLogin()
                     .loginPage("/login")
                     .usernameParameter("email")
