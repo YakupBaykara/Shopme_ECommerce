@@ -1,5 +1,6 @@
-package com.shopme.admin.user;
+package com.shopme.admin.user.controller;
 
+import com.shopme.admin.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class AccountController {
         User user = userService.getByEmail(email);
         model.addAttribute("user", user);
 
-        return "account_form";
+        return "users/account_form";
 
     }
 
